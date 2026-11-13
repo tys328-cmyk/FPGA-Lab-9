@@ -1,0 +1,50 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 11/06/2026 01:14:43 PM
+// Design Name: 
+// Module Name: ram
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
+
+module ram (
+    input wire clk,
+    input wire we,
+    input wire [2:0] addr,
+    input wire [7:0] data_in,
+    output wire [7:0] data_out
+);
+
+    reg [7:0] memory [0:7];
+
+    // Load initial RAM values from text file
+    initial begin
+        $readmemh("ram_data.mem", memory);
+    end
+
+    // Write data on rising clock edge
+    always @(posedge clk) begin
+        if (we)
+            memory[addr] <= data_in;
+    end
+
+    // Read data from selected address
+    assign data_out = memory[addr];
+
+endmodule
+
+
