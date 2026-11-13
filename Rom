@@ -1,0 +1,41 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 11/06/2026 01:30:09 PM
+// Design Name: 
+// Module Name: rom
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
+
+module rom (
+    input wire [2:0] addr,
+    output wire [3:0] data_out
+);
+
+    reg [3:0] memory [0:7];
+
+    // Load ROM contents from text file
+    initial begin
+        $readmemh("rom_data.mem", memory);
+    end
+
+    // Read selected ROM address
+    assign data_out = memory[addr];
+
+endmodule
+
+
